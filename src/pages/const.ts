@@ -99,6 +99,7 @@ export const projects: Project[] = [
   },
   {
     title: 'WatchIt',
+    type: 'For fun',
     description:
       'An interactive platform presenting analytical insights on Swiss mountain lakes, built with native JavaScript. Part of research work published as "Characterizing Swiss Alpine Lakes: from Wikipedia to Citizen Science".',
     tech: ['3D modelling', 'Restful API', 'React', 'Three.js'],
