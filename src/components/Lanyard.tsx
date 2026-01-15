@@ -65,8 +65,7 @@ export default function Lanyard({
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band isMobile={isMobile} />
         </Physics>
-        <Environment background blur={0.7}>
-          <color attach="background" args={['black']} />
+        <Environment>
           <Lightformer
             intensity={2}
             color="white"
@@ -75,25 +74,11 @@ export default function Lanyard({
             scale={[100, 0.1, 1]}
           />
           <Lightformer
-            intensity={3}
+            intensity={30}
             color="white"
-            position={[-1, -1, 1]}
+            position={[-1, -1, 10]}
             rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={3}
-            color="white"
-            position={[1, 1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={10}
-            color="white"
-            position={[-10, 0, 14]}
-            rotation={[0, Math.PI / 2, Math.PI / 3]}
-            scale={[100, 10, 1]}
+            scale={[1, 0.1, 1]}
           />
         </Environment>
       </Canvas>
