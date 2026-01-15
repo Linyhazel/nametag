@@ -1,11 +1,13 @@
 /* eslint-disable react/no-unknown-property */
+'use client'
 import { Environment, Lightformer, useTexture } from '@react-three/drei'
-import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, extend, useFrame } from '@react-three/fiber'
 import {
   BallCollider,
   CuboidCollider,
   Physics,
   RigidBody,
+  type RigidBodyProps,
   useRopeJoint,
   useSphericalJoint,
 } from '@react-three/rapier'
@@ -13,20 +15,10 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline'
 import { useEffect, useRef, useState } from 'react'
 import * as THREE from 'three'
 
-import lanyardTexture from '/lanyard.png'
-// import cardGLB from "/tag.glb?url";
-
-import '../css/Lanyard.css'
 import { NameTag } from './models/NameTag'
+import lanyard from '/lanyard.png'
 
 extend({ MeshLineGeometry, MeshLineMaterial })
-
-declare module '@react-three/fiber' {
-  interface ThreeElements {
-    meshLineGeometry: any
-    meshLineMaterial: any
-  }
-}
 
 interface LanyardProps {
   position?: [number, number, number]
@@ -41,20 +33,20 @@ export default function Lanyard({
   fov = 20,
   transparent = true,
 }: LanyardProps) {
-  const [isMobile, setIsMobile] = useState(
+  const [isMobile, setIsMobile] = useState<boolean>(
     () => typeof window !== 'undefined' && window.innerWidth < 768
   )
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    const handleResize = (): void => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return (
-    <div className="lanyard-wrapper">
+    <div className="relative z-0 w-full h-screen flex justify-center items-center transform scale-100 origin-center">
       <Canvas
-        camera={{ position: position, fov: fov }}
+        camera={{ position, fov }}
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) =>
@@ -65,7 +57,7 @@ export default function Lanyard({
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band isMobile={isMobile} />
         </Physics>
-        <Environment>
+        <Environment blur={0.75}>
           <Lightformer
             intensity={2}
             color="white"
@@ -74,11 +66,18 @@ export default function Lanyard({
             scale={[100, 0.1, 1]}
           />
           <Lightformer
-            intensity={30}
+            intensity={3}
             color="white"
-            position={[-1, -1, 10]}
+            position={[-1, -1, 1]}
             rotation={[0, 0, Math.PI / 3]}
-            scale={[1, 0.1, 1]}
+            scale={[100, 0.1, 1]}
+          />
+          <Lightformer
+            intensity={3}
+            color="white"
+            position={[1, 1, 1]}
+            rotation={[0, 0, Math.PI / 3]}
+            scale={[100, 0.1, 1]}
           />
         </Environment>
       </Canvas>
@@ -93,28 +92,28 @@ interface BandProps {
 }
 
 function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
-  const band = useRef<any>(null!)
-  const fixed = useRef<any>(null!)
-  const j1 = useRef<any>(null!)
-  const j2 = useRef<any>(null!)
-  const j3 = useRef<any>(null!)
-  const card = useRef<any>(null!)
+  // Using "any" for refs since the exact types depend on Rapier's internals
+  const band = useRef<any>(null)
+  const fixed = useRef<any>(null)
+  const j1 = useRef<any>(null)
+  const j2 = useRef<any>(null)
+  const j3 = useRef<any>(null)
+  const card = useRef<any>(null)
 
   const vec = new THREE.Vector3()
   const ang = new THREE.Vector3()
   const rot = new THREE.Vector3()
   const dir = new THREE.Vector3()
 
-  const segmentProps = {
-    type: 'dynamic' as const,
+  const segmentProps: any = {
+    type: 'dynamic' as RigidBodyProps['type'],
     canSleep: true,
-    colliders: false as const,
+    colliders: false,
     angularDamping: 4,
     linearDamping: 4,
   }
 
-  const texture = useTexture(lanyardTexture)
-  const { width, height } = useThree((state) => state.size)
+  const texture = useTexture(lanyard)
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([
@@ -125,7 +124,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
       ])
   )
 
-  const [dragged, drag] = useState<THREE.Vector3 | false>(false)
+  const [dragged, drag] = useState<false | THREE.Vector3>(false)
   const [hovered, hover] = useState(false)
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1])
@@ -139,12 +138,14 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   useEffect(() => {
     if (hovered) {
       document.body.style.cursor = dragged ? 'grabbing' : 'grab'
-      return () => void (document.body.style.cursor = 'auto')
+      return () => {
+        document.body.style.cursor = 'auto'
+      }
     }
   }, [hovered, dragged])
 
   useFrame((state, delta) => {
-    if (dragged) {
+    if (dragged && typeof dragged !== 'boolean') {
       vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera)
       dir.copy(vec).sub(state.camera.position).normalize()
       vec.add(dir.multiplyScalar(state.camera.position.length()))
@@ -207,21 +208,44 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   return (
     <>
       <group position={[0, 5, 0]}>
-        <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
+        <RigidBody
+          ref={fixed}
+          {...segmentProps}
+          type={'fixed' as RigidBodyProps['type']}
+        />
+        <RigidBody
+          position={[0.5, 0, 0]}
+          ref={j1}
+          {...segmentProps}
+          type={'dynamic' as RigidBodyProps['type']}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
+        <RigidBody
+          position={[1, 0, 0]}
+          ref={j2}
+          {...segmentProps}
+          type={'dynamic' as RigidBodyProps['type']}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
-        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
+        <RigidBody
+          position={[1.5, 0, 0]}
+          ref={j3}
+          {...segmentProps}
+          type={'dynamic' as RigidBodyProps['type']}
+        >
           <BallCollider args={[0.1]} />
         </RigidBody>
         <RigidBody
           position={[2, 0, 0]}
           ref={card}
           {...segmentProps}
-          type={dragged ? 'kinematicPosition' : 'dynamic'}
+          type={
+            dragged
+              ? ('kinematicPosition' as RigidBodyProps['type'])
+              : ('dynamic' as RigidBodyProps['type'])
+          }
         >
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
@@ -251,7 +275,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         <meshLineMaterial
           color="white"
           depthTest={false}
-          resolution={[width, height]}
+          resolution={isMobile ? [100, 200] : [100, 100]}
           useMap
           map={texture}
           repeat={[-3, 1]}
