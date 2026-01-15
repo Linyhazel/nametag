@@ -61,14 +61,18 @@ export function NameTag(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.clip.geometry}
         material={nodes.clip.material}
         position={[0, 0, 0]}
-      />
+      >
+        <meshStandardMaterial color="#63ff00" metalness={0.2} roughness={0.1} />
+      </mesh>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.clamp.geometry}
         material={nodes.clamp.material}
         position={[0, 0, 0]}
-      />
+      >
+        <meshStandardMaterial color="#63ff00" metalness={0.2} roughness={0.1} />
+      </mesh>
     </group>
   )
 }
