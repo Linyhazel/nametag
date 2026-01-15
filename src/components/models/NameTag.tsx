@@ -6,7 +6,7 @@ import { useGLTF } from '@react-three/drei'
 import type { JSX } from 'react'
 
 export function NameTag(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/card.glb') as any
+  const { nodes } = useGLTF('/card.glb') as any
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0.2, 0]} scale={[1.6515, 1.7, 1.3]}>
