@@ -179,6 +179,26 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
       rot.copy(card.current.rotation())
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z })
     }
+
+    // Mouse tracking rotation effect when not dragging
+    if (!dragged && card.current) {
+      // Wake up the physics body so it responds
+      card.current.wakeUp()
+
+      // Use pointer directly for rotation (normalized -1 to 1)
+      const mouseX = state.pointer.x
+
+      // Apply torque impulse to rotate towards mouse
+      const torqueStrength = 0.001
+      card.current.applyTorqueImpulse(
+        {
+          x: 0,
+          y: mouseX * torqueStrength,
+          z: 0,
+        },
+        true
+      )
+    }
   })
 
   curve.curveType = 'chordal'
