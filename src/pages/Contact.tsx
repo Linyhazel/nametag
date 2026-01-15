@@ -82,13 +82,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-
-        <div className="mt-12">
-          <p className="text-neutral-500 text-sm">
-            Languages: English (C1) | French (A2) | Mandarin (Native)
-          </p>
-        </div>
       </div>
     </div>
-  )
+  );
 }

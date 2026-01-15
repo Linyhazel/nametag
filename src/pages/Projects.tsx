@@ -1,42 +1,6 @@
-export default function ProjectsPage() {
-  const projects = [
-    {
-      title: 'Swiss Alpine Lakes Platform',
-      description:
-        'An interactive platform presenting analytical insights on Swiss mountain lakes, built with native JavaScript. Part of research work published as "Characterizing Swiss Alpine Lakes: from Wikipedia to Citizen Science".',
-      tech: ['JavaScript', 'Data Visualization', 'NLP', 'Python'],
-      type: 'Research',
-    },
-    {
-      title: 'Data-Driven Web Applications',
-      description:
-        'Frontend and backend components for enterprise-level data-driven web applications at Quanthome, featuring RESTful APIs with Ory Kratos authentication and Ory Keto role-based access control.',
-      tech: ['React', 'Node.js', 'TypeScript', 'REST API', 'Ory Kratos'],
-      type: 'Professional',
-    },
-    {
-      title: 'Smartcard File System Application',
-      description:
-        'A C# application to construct the internal file system for smartcards, deployed in a parking management system.',
-      tech: ['C#', 'ASP.NET', 'MySQL'],
-      type: 'Professional',
-    },
-    {
-      title: 'Trademark Recognition GUI',
-      description:
-        'Python-based graphical user interface for trademark recognition system.',
-      tech: ['Python', 'GUI Development', 'Image Recognition'],
-      type: 'Internship',
-    },
-    {
-      title: 'Delivery Robot Control App',
-      description:
-        'Android application to control and monitor delivery robots, including test case creation and performance metrics analysis.',
-      tech: ['Android Studio', 'Java', 'Robotics'],
-      type: 'Internship',
-    },
-  ]
+import { projects } from './const';
 
+export default function ProjectsPage() {
   return (
     <div className="w-full h-full overflow-y-auto pb-24 pt-8 px-8">
       <div className="max-w-5xl mx-auto">
@@ -102,5 +66,5 @@ export default function ProjectsPage() {
         </section>
       </div>
     </div>
-  )
+  );
 }
