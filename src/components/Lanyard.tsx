@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { Environment, Lightformer, useTexture } from '@react-three/drei'
-import { Canvas, extend, useFrame } from '@react-three/fiber'
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
 import {
   BallCollider,
   CuboidCollider,
@@ -65,7 +65,8 @@ export default function Lanyard({
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
           <Band isMobile={isMobile} />
         </Physics>
-        <Environment>
+        <Environment background blur={0.7}>
+          <color attach="background" args={['black']} />
           <Lightformer
             intensity={2}
             color="white"
@@ -128,7 +129,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
   }
 
   const texture = useTexture(lanyardTexture)
-
+  const { width, height } = useThree((state) => state.size)
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([
@@ -245,10 +246,10 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }: BandProps) {
         <meshLineMaterial
           color="white"
           depthTest={false}
-          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
+          resolution={[width, height]}
           useMap
           map={texture}
-          repeat={[-4, 1]}
+          repeat={[-3, 1]}
           lineWidth={1}
         />
       </mesh>
