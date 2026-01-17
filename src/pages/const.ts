@@ -75,13 +75,16 @@ export const educations: Education[] = [
     degree: 'Bachelor of Science in Computer Science',
     period: '2015 - 2020',
     school: 'The Chinese University of Hong Kong',
-    contentList: ["Graduated with Honors, First Class | Dean's List 2019-2020"],
+    contentList: [
+      'Graduated with Honors, First Class',
+      "Dean's List 2019-2020",
+    ],
   },
 ];
 
 type Project = {
   title: string;
-  description: string;
+  descriptions: string[];
   tech: string[];
   type?: string;
   link: string;
@@ -90,36 +93,67 @@ type Project = {
 
 export const projects: Project[] = [
   {
-    title: 'Quanthome',
-    description:
-      'Frontend and backend components for enterprise-level data-driven web applications at Quanthome, featuring RESTful APIs with Ory Kratos authentication and Ory Keto role-based access control.',
-    tech: ['React', 'Node.js', 'TypeScript', 'REST API', 'Ory kratos'],
+    title: 'Quanthome Platform',
+    descriptions: [
+      `As one of the developers behind the Quanthome Platform, 
+      I helped build a SaaS product that brings clarity to real estate data,
+      especially in a market where information is traditionally fragmented and hard to work with. 
+      Quanthome unifies financial, ESG, structural, and market data for 
+      millions of Swiss buildings and investment vehicles into a single, standardized platform 
+      that analysts, investors, and asset managers can trust. 
+      At its core, the platform lets users search, filter, compare, and analyze real estate assets 
+      and portfolios with speed and accuracy, removing the need to chase down scattered sources.`,
+    ],
+    tech: ['React', 'Node.js', 'TypeScript', 'REST API', 'Ory'],
     type: 'Professional project',
     link: 'https://quanthome.com/products/platform',
   },
   {
-    title: 'WatchIt',
-    type: 'For fun',
-    description:
-      'An interactive platform presenting analytical insights on Swiss mountain lakes, built with native JavaScript. Part of research work published as "Characterizing Swiss Alpine Lakes: from Wikipedia to Citizen Science".',
-    tech: ['3D modelling', 'Restful API', 'React', 'Three.js'],
-    link: 'https://www.watch-it.app/',
+    title: 'Disney Movie Visualization',
+    descriptions: [
+      `For the COM-480 Data Visualization course project, my teammates and I built “Disney Movie Viz”, 
+      an interactive web visualization that explores patterns and relationships in data from Disney movies. 
+      The site invites users to interactively explore multiple aspects of the Disney corpus, 
+      such as character popularity, movie financials, and creative collaborations, using engaging 
+      visual elements directly in the browser. We crafted this project to make multivariate data fun and accessible, 
+      combining interactive charts, sliders, and visual encodings so that users can draw their own insights 
+      without needing any background in statistics or data science.`,
+    ],
+    tech: ['Javascript', 'HTML', 'CSS', 'Data science', 'Data visualization'],
+    type: 'Course project',
+    link: 'https://com-480-data-visualization.github.io/data-visualization-project-2021-vizzz/',
   },
   {
     title: '2000Lake',
-    description:
-      'An interactive platform presenting analytical insights on Swiss mountain lakes, built with native JavaScript. Part of research work published as "Characterizing Swiss Alpine Lakes: from Wikipedia to Citizen Science".',
-    tech: ['JavaScript', 'Data visualization', 'NLP', 'Python'],
+    descriptions: [
+      `2000Lakes is part of a broader research and citizen science project focused on understanding 
+      how climate change affects high-mountain lakes above 2000 m in the Alps, 
+      with a particular focus on ecological and microbial dynamics. 
+      The platform allows users to explore real scientific measurements through interactive visualizations. 
+      To provide better context, the dataset is enriched with information sourced from Wikipedia, 
+      helping users connect scientific data with geographic, and cultural knowledge about each lake.`,
+
+      `This work contributed to a peer-reviewed ACM publication, documenting both the scientific insights and 
+      the design of the interactive system used to communicate them.
+      My goal with this project was to bridge scientific research and public engagement through thoughtful 
+      data visualization and interaction design.`,
+    ],
+    tech: ['JavaScript', 'HTML', 'CSS', 'Data visualization', 'NLP', 'Python'],
     type: 'Research project',
     link: 'https://linyhazel.github.io/2000Lakes_web/',
     extraLink: 'https://dl.acm.org/doi/full/10.1145/3617128',
   },
   {
-    title: 'Disney Movie Visualization',
-    description:
-      'A C# application to construct the internal file system for smartcards, deployed in a parking management system.',
-    tech: ['Javascript', 'Data science', 'Data visualization'],
-    type: 'Course project',
-    link: 'https://com-480-data-visualization.github.io/data-visualization-project-2021-vizzz/',
+    title: 'WatchIt',
+    type: 'Interest oriented project',
+    descriptions: [
+      `WatchIT is a parametric 3D watch part generator designed for enthusiasts, designers, 
+      and makers who want a flexible way to create custom components for watches. 
+      At its heart, WatchIT lets you define and tweak key parameters in real time, 
+      immediately visualizing how your design changes and then exporting the results for 3D printing 
+      or further refinement.`,
+    ],
+    tech: ['3D modelling', 'REST API', 'React', 'Typescript', 'Three.js'],
+    link: 'https://www.watch-it.app/',
   },
 ];

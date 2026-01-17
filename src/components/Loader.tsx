@@ -6,9 +6,10 @@ export function Loader() {
     <Html center>
       <TextType
         text={['Loading...']}
-        typingSpeed={750}
+        typingSpeed={10}
         showCursor={true}
         cursorCharacter="|"
+        cursorClassName="color-lime-400"
         textColors={['#63ff00']}
         className="text-5xl"
       />

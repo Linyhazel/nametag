@@ -6,14 +6,16 @@ export default function ProjectsPage() {
     <div className="w-full h-full overflow-y-auto pb-24 pt-8 px-8">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection delay={0}>
-          <h1 className="text-4xl font-bold mb-8 text-white">Projects</h1>
+          <h1 className="text-4xl font-bold mb-8 text-white mb-6 text-white border-b border-neutral-700 pb-2">
+            Projects
+          </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="columns-1 md:columns-2 gap-6 space-y-6">
             {projects.map((project, index) => (
               <AnimatedSection delay={400}>
                 <div
                   key={index}
-                  className="bg-neutral-900/50 rounded-xl p-6 border border-neutral-800 hover:border-lime-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-lime-500/10 flex flex-col"
+                  className="break-inside-avoid bg-neutral-900/50 rounded-xl p-6 border border-neutral-800 hover:border-lime-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-lime-500/10 flex flex-col"
                 >
                   <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-semibold text-white">
@@ -24,9 +26,11 @@ export default function ProjectsPage() {
                     </span>
                   </div>
 
-                  <p className="text-neutral-400 mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
+                  {project.descriptions.map((description) => (
+                    <p className="text-neutral-400 mb-4 leading-relaxed">
+                      {description}
+                    </p>
+                  ))}
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech) => (
