@@ -20,7 +20,12 @@ import { NameTag } from './models/NameTag';
 import lanyard from '/lanyard.png';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
-
+declare module '@react-three/fiber' {
+  interface ThreeElements {
+    meshLineGeometry: any;
+    meshLineMaterial: any;
+  }
+}
 interface LanyardProps {
   position?: [number, number, number];
   gravity?: [number, number, number];
