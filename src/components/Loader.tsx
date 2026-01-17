@@ -8,9 +8,9 @@ export function Loader() {
         text={['Loading...']}
         typingSpeed={10}
         showCursor={true}
-        cursorCharacter="|"
-        cursorClassName="color-lime-400"
-        textColors={['#63ff00']}
+        cursorCharacter="_"
+        cursorClassName="text-lime-400"
+        textColors={['#9ae600']}
         className="text-5xl"
       />
     </Html>
