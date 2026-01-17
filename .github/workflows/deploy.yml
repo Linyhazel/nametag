@@ -20,6 +20,7 @@ jobs:
           node-version: 25
 
       - run: npm ci
+      - run: cp sample.env .env
       - run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
