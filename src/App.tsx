@@ -1,6 +1,6 @@
 import { Download, Folders, Home, User } from 'lucide-react';
 import { useMemo } from 'react';
-import { HashRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Dock from './components/Dock';
 import DownloadPage from './pages/Download';
@@ -56,9 +56,9 @@ function Layout() {
 
 function App() {
   return (
-    <HashRouter basename={import.meta.env.VITE_BASE_PATH}>
+    <BrowserRouter basename={import.meta.env.VITE_BASE_PATH}>
       <Layout />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
