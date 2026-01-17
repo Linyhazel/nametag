@@ -10,12 +10,48 @@ export function Printer(props: JSX.IntrinsicElements['group']) {
   return (
     <group {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_2.geometry}
-          material={nodes.Object_2.material}
-        />
+        <group
+          position={[-0.401, 0.129, 0.198]}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={[0.427, 0.427, 0.572]}
+        >
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Box_1.geometry}
+            material={nodes.Box_1.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Box_2.geometry}
+            material={nodes.Box_2.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Box_3.geometry}
+            material={nodes.Box_3.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Box_4.geometry}
+            material={nodes.Box_4.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Box_5.geometry}
+            material={nodes.Box_5.material}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Box_6.geometry}
+            material={nodes.Box_6.material}
+          />
+        </group>
         <mesh
           castShadow
           receiveShadow
