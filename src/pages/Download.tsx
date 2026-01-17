@@ -54,7 +54,7 @@ function PrintingPaper(props: {
 
     if (pos.z < printerEndZ) {
       // Still on table → apply tiny impulse to slide
-      bodyRef.current.applyImpulse({ x: 0, y: 0, z: 0.0014 }, true);
+      bodyRef.current.applyImpulse({ x: 0, y: 0, z: 0.0012 }, true);
     }
   });
 
