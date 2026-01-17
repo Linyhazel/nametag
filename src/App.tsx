@@ -1,15 +1,15 @@
-import { Folders, Home, Mail, User } from 'lucide-react'
-import { useMemo } from 'react'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
-import './App.css'
-import Dock from './components/Dock'
-import ContactPage from './pages/Contact'
-import HomePage from './pages/Home'
-import ProfilePage from './pages/Profile'
-import ProjectsPage from './pages/Projects'
+import { Download, Folders, Home, User } from 'lucide-react';
+import { useMemo } from 'react';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import './App.css';
+import Dock from './components/Dock';
+import DownloadPage from './pages/Download';
+import HomePage from './pages/Home';
+import ProfilePage from './pages/Profile';
+import ProjectsPage from './pages/Projects';
 
 function Layout() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dockItems = useMemo(
     () => [
       {
@@ -28,13 +28,13 @@ function Layout() {
         onClick: () => navigate('/projects'),
       },
       {
-        icon: <Mail />,
-        label: 'Contact',
-        onClick: () => navigate('/contact'),
+        icon: <Download />,
+        label: 'Download',
+        onClick: () => navigate('/download'),
       },
     ],
     []
-  )
+  );
 
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
@@ -42,7 +42,7 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/projects" element={<ProjectsPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/Download" element={<DownloadPage />} />
       </Routes>
       <Dock
         items={dockItems}
@@ -51,7 +51,7 @@ function Layout() {
         magnification={70}
       />
     </div>
-  )
+  );
 }
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
     <BrowserRouter>
       <Layout />
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;
