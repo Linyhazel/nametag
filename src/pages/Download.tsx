@@ -26,6 +26,8 @@ import {
 } from 'react';
 import * as THREE from 'three';
 
+const BASE_URL = import.meta.env.VITE_BASE_PATH;
+
 interface Props {
   position?: [number, number, number];
   gravity?: [number, number, number];
@@ -95,7 +97,7 @@ export default function DownloadPage({
   }, []);
 
   const handleDownload = () => {
-    const pdfUrl = '/cv.pdf';
+    const pdfUrl = `${BASE_URL}cv.pdf`;
 
     const link = document.createElement('a');
     link.href = pdfUrl;
