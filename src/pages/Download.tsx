@@ -1,4 +1,5 @@
 import { Ground } from '@/components/Ground';
+import { Loader } from '@/components/Loader';
 import { CV } from '@/components/models/CV';
 import { Printer } from '@/components/models/Printer';
 import {
@@ -15,6 +16,7 @@ import { Environment, Lightformer, OrbitControls } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier';
 import {
+  Suspense,
   useCallback,
   useEffect,
   useRef,
@@ -119,23 +121,25 @@ export default function DownloadPage({
         }}
       >
         <ambientLight intensity={Math.PI} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <RigidBody type="fixed" colliders={false}>
-            <Printer scale={[3, 3, 3]} position={[0, 1.63, 0]} />
-            {/* Printer inside collider - hold the paper inside */}
-            <CuboidCollider
-              args={[0.4, 0.35, 0.5]}
-              position={[0, 1.0, -0.65]}
+        <Suspense fallback={<Loader />}>
+          <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
+            <RigidBody type="fixed" colliders={false}>
+              <Printer scale={[3, 3, 3]} position={[0, 1.63, 0]} />
+              {/* Printer inside collider - hold the paper inside */}
+              <CuboidCollider
+                args={[0.4, 0.35, 0.5]}
+                position={[0, 1.0, -0.65]}
+              />
+              {/* Paper tray collider - flat surface where paper lands */}
+              <CuboidCollider args={[0.4, 0.2, 2]} position={[0, 1.0, 0.6]} />
+            </RigidBody>
+            <PrintingPaper
+              setHovered={setHovered}
+              setDialogOpen={setDialogOpen}
             />
-            {/* Paper tray collider - flat surface where paper lands */}
-            <CuboidCollider args={[0.4, 0.2, 2]} position={[0, 1.0, 0.6]} />
-          </RigidBody>
-          <PrintingPaper
-            setHovered={setHovered}
-            setDialogOpen={setDialogOpen}
-          />
-          <Ground />
-        </Physics>
+            <Ground />
+          </Physics>
+        </Suspense>
         <OrbitControls
           target={[0, 1, 0]}
           minDistance={10}
