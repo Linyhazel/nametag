@@ -11,9 +11,10 @@ export const experiences: Experience[] = [
     period: '05/2023 - Present',
     company: 'Quanthome | Lausanne, Switzerland',
     contentList: [
-      'Developed, maintained, and optimized frontend and backend components for data-driven web applications using React, Node.js, and TypeScript.',
-      'Worked closely with the UI/UX design team to build innovative, user-focused features, translating designs into interactive, scalable, and maintainable components.',
-      'Designed and implemented RESTful APIs with user authentication (Ory Kratos) and role-based access control (Ory Keto).',
+      'Build full-stack features, including a multi-agent system, using React, TypeScript, and Node.js for a real-estate analytics platform covering 2M+ buildings and hundreds of funds across Switzerland.',
+      'Design and implement REST APIs with authentication and role-based access control using Kratos and Keto.',
+      'Develop and maintain a reusable React UI component library, including 15 interactive data visualization components, to standardize analytical user interfaces across internal platforms.',
+      'Collaborate with product designers and data scientists to deliver analytics tools for institutional investors, banks, and asset managers.',
     ],
   },
   {
@@ -155,5 +156,28 @@ export const projects: Project[] = [
     ],
     tech: ['3D modelling', 'REST API', 'React', 'Typescript', 'Three.js'],
     link: 'https://www.watch-it.app/',
+  },
+  {
+    title: 'Vocabloom',
+    type: 'Interest oriented project',
+    descriptions: [
+      `Vocabloom is a mobile language-learning app that turns everyday photos into illustrated vocabulary pages.
+      Users take or upload a photo, and an AI pipeline transforms it into a clear-line illustration with tappable word overlays.
+      Tapping a word reveals its meaning, IPA pronunciation, and an example sentence.
+      Words can be saved as flashcards for later review.`,
+      `The project is built as a monorepo with a React Native (Expo) mobile app, a Koa REST API,
+      and an async AI worker that orchestrates image generation and vocabulary extraction using OpenAI models.
+      Data is stored in Supabase (Postgres + Storage).`,
+    ],
+    tech: [
+      'React Native',
+      'Expo',
+      'Node.js',
+      'TypeScript',
+      'OpenAI',
+      'Supabase',
+      'Koa',
+    ],
+    link: 'https://vocabloomapp.com/',
   },
 ];

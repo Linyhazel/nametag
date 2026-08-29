@@ -142,18 +142,26 @@ export default function ProfilePage() {
             <div className="flex flex-wrap gap-3">
               {[
                 'TypeScript',
+                'JavaScript',
+                'SQL',
+                'Python',
+                'MATLAB',
+                'C',
+                'C#',
+                'Java',
                 'React',
                 'Next.js',
                 'Three.js',
                 'Node.js',
                 'REST API',
-                'SQL',
-                'Python',
-                'MATLAB',
-                'C#',
-                'Java',
+                'Redis',
+                'HTML/CSS',
+                'Git',
+                'Docker',
                 'Unity 3D',
+                'Android Studio',
                 'Software Testing',
+                'Data Visualization',
               ].map((skill, index) => (
                 <span
                   key={skill}
